@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Xerox Kiosk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="kiosk-main-layout">
+        <!-- Header Section for Stepper -->
+        <header class="kiosk-header">
+            <div class="stepper-container">
+                <div class="step active" id="step-scan">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Scan</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-preview">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Preview</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-payment">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Pay</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Section -->
+        <main id="app" class="kiosk-body">
+            <div id="loading">Initialize Kiosk...</div>
+        </main>
+    </div>
+
+    <!-- Admin Menu Dropdown -->
+    <div class="admin-menu-container">
+        <button onclick="toggleKioskMenu()" class="admin-nav-btn">⚙️</button>
+        <div id="kiosk-dropdown" class="kiosk-dropdown-content">
+            <a href="#" onclick="openAuthModal('price')">Edit Price</a>
+            <a href="#" onclick="openAuthModal('logout')">Logout</a>
+        </div>
+    </div>
+
+    <!-- Secure Action Modal -->
+    <div id="security-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+
+            <!-- Step 1: Password Auth -->
+            <div id="modal-auth-step">
+                <h2 id="modal-title">Admin Access</h2>
+                <p>Enter password to continue</p>
+                <input type="password" id="modal-password" placeholder="Password" class="modal-input">
+                <button onclick="verifyAndProceed()" class="modal-btn">Verify</button>
+                <p id="modal-error" class="error-text"></p>
+            </div>
+
+            <!-- Step 2: Price Edit (Hidden initially) -->
+            <div id="modal-price-step" style="display:none;">
+                <h2>Update Price</h2>
+                <div class="input-group">
+                    <label>Current Price: ₹<span id="current-price-display">--</span></label>
+                    <input type="number" id="new-price-input" step="0.5" class="modal-input" placeholder="New Price">
+                </div>
+                <button onclick="confirmPriceUpdate()" class="modal-btn success">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="kiosk.js"></script>
+</body>
+
+</html>

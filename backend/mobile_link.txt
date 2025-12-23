@@ -1,0 +1,1 @@
+http://localhost:8000/mobile/upload.html?session_id=8b38d89b-5516-4520-9d09-15ac86b9da96

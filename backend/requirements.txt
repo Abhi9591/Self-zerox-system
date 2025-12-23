@@ -1,0 +1,15 @@
+
+fastapi
+pydantic-settings
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pypdf
+boto3
+qrcode[pil]
+pillow
+requests
+python-dotenv

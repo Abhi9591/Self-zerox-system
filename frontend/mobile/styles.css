@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-box {
+    border: 3px dashed #ced4da;
+    border-radius: 10px;
+    padding: 40px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    border-color: #007bff;
+    background: #f1f8ff;
+}
+
+#file-input {
+    display: none;
+}
+
+#progress-container {
+    width: 100%;
+    background: #e9ecef;
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #28a745;
+    transition: width 0.3s;
+}
+
+#status {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Success Card Styles */
+.success-card {
+    display: none;
+    /* Hidden by default */
+    background: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    animation: fadeIn 0.5s;
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.file-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+    word-break: break-all;
+}
+
+.file-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

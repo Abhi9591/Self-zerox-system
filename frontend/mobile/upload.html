@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Upload Document</h1>
+        <div class="upload-box" id="drop-zone">
+            <input type="file" id="file-input" accept="application/pdf">
+            <p>Tap to select PDF</p>
+        </div>
+        <div id="progress-container" style="display:none;">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="status"></div>
+
+        <!-- Success Feedback -->
+        <div id="success-card" class="success-card">
+            <div class="success-icon">✅</div>
+            <h3>File Uploaded!</h3>
+            <div class="file-name" id="uploaded-filename">filename.pdf</div>
+            <div class="file-meta">
+                Size: <span id="uploaded-size">0 KB</span><br>
+                Sent to Kiosk
+            </div>
+            <p style="margin-top:15px; font-size:0.9rem; color:#555;">Check the Kiosk screen to proceed with payment.
+            </p>
+        </div>
+    </div>
+    <script src="upload.js"></script>
+</body>
+
+</html>
