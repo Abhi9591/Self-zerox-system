@@ -29,7 +29,7 @@ cd backend
 
 #### Install Dependencies
 ```bash
-pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
 
 #### Environment Configuration
@@ -40,10 +40,10 @@ Run the following commands to initialize the database and seed default data:
 
 ```bash
 # Setup PostgreSQL tables
-python setup_postgres.py
+py setup_postgres.py
 
 # Seed default data (Admin user, Machines, etc.)
-python seed_db.py
+py seed_db.py
 ```
 
 ### 2. Running the Server
@@ -51,7 +51,7 @@ python seed_db.py
 Start the FastAPI server using Uvicorn:
 
 ```bash
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+py -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The server will be accessible at `http://localhost:8000`.
@@ -72,5 +72,5 @@ For Windows users, you can use the provided batch file to install dependencies, 
 
 ```bash
 cd backend
-run.bat
+
 ```
