@@ -1,19 +1,38 @@
 
+
 import psycopg2
 import os
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 from app.core.security import get_password_hash
 
 load_dotenv()
 
 def seed_data():
     try:
-        conn = psycopg2.connect(
-            host=os.getenv("POSTGRES_SERVER", "localhost"),
-            database=os.getenv("POSTGRES_DB", "self_xerox"),
-            user=os.getenv("POSTGRES_USER", "postgres"),
-            password=os.getenv("POSTGRES_PASSWORD", "password")
-        )
+        # Support both DATABASE_URL and individual variables
+        database_url = os.getenv("DATABASE_URL")
+        
+        if database_url:
+            # Parse DATABASE_URL (for Render.com)
+            parsed = urlparse(database_url)
+            conn = psycopg2.connect(
+                host=parsed.hostname,
+                port=parsed.port or 5432,
+                database=parsed.path[1:],  # Remove leading '/'
+                user=parsed.username,
+                password=parsed.password
+            )
+            print(f"Connected using DATABASE_URL: {parsed.hostname}")
+        else:
+            # Use individual variables (for local development)
+            conn = psycopg2.connect(
+                host=os.getenv("POSTGRES_SERVER", "localhost"),
+                database=os.getenv("POSTGRES_DB", "self_xerox"),
+                user=os.getenv("POSTGRES_USER", "postgres"),
+                password=os.getenv("POSTGRES_PASSWORD", "password")
+            )
+            print(f"Connected to local database")
         cur = conn.cursor()
 
         # 1. Admin

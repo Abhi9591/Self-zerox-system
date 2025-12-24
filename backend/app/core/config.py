@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     # DATABASE
+    # Support both DATABASE_URL (for Render.com) and individual variables (for local)
+    DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL", None)
     POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "password")
@@ -38,7 +40,11 @@ class Settings(BaseSettings):
 
     def __validator__(self):
         if not self.SQLALCHEMY_DATABASE_URI:
-            self.SQLALCHEMY_DATABASE_URI = f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"
+            # Use DATABASE_URL if provided (Render.com), otherwise build from individual variables
+            if self.DATABASE_URL:
+                self.SQLALCHEMY_DATABASE_URI = self.DATABASE_URL
+            else:
+                self.SQLALCHEMY_DATABASE_URI = f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"
 
 settings = Settings()
 try:

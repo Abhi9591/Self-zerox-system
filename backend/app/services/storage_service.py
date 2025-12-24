@@ -1,5 +1,7 @@
 
+
 import boto3
+from botocore.config import Config
 from botocore.exceptions import NoCredentialsError
 from app.core.config import settings
 import uuid
@@ -11,13 +13,19 @@ class StorageService:
         self.local_mode = False
         
         try:
+            # Configure timeouts properly using Config object
+            s3_config = Config(
+                connect_timeout=2,
+                read_timeout=2,
+                retries={'max_attempts': 1}
+            )
+            
             self.s3_client = boto3.client(
                 's3',
                 endpoint_url=settings.S3_ENDPOINT_URL,
                 aws_access_key_id=settings.S3_ACCESS_KEY,
                 aws_secret_access_key=settings.S3_SECRET_KEY,
-                connect_timeout=2,
-                read_timeout=2
+                config=s3_config
             )
             # Fast check
             self.s3_client.head_bucket(Bucket=self.bucket_name)
