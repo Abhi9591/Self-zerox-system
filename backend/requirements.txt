@@ -13,3 +13,4 @@ qrcode[pil]
 pillow
 requests
 python-dotenv
+gunicorn
